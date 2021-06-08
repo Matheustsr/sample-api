@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src src/server.js"
+    "dev": "nodemon src/server.js"
   },
   "dependencies": {
+    "core-util-is": "^1.0.2",
     "express": "^4.17.1",
     "mongoose": "^5.12.13"
   },
