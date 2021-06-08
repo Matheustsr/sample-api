@@ -1,5 +1,14 @@
 import User from '../models/User'
 
+/*
+index: listagem de sessoes
+store: Criar uma sessao -- 
+show: Quando queremos listar uma UNICA sessao -- 
+update: quando queremos alterar alguma sessao
+destroy: quando queremos deletar uma sessao
+
+*/ 
+
 class SessionController{
 
    async store(req, res){
@@ -16,6 +25,7 @@ class SessionController{
         return res.json(user)
         
     }
+
 }
 
 

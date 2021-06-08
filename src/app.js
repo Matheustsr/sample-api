@@ -10,6 +10,7 @@ class App{
     mongoose.connect('mongodb+srv://admin:admin@cluster0.mt7qk.mongodb.net/devhouse?retryWrites=true&w=majority', {
       useNewUrlParser: true, //Configure to a new URL format
       useUnifiedTopology: true, // keep a stable connection
+      
     });
 
     this.middlewares();
