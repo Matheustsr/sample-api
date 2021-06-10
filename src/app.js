@@ -22,8 +22,9 @@ class App{
 
     this.server.use(
       '/files',
-      express.static(path.resolve(__dirname, '..', 'uploads'))
+      express.static(path.resolve(__dirname, '..', 'uploads')) //middleware to URL 
     );
+
     this.server.use(express.json());
   }
 

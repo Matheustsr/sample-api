@@ -9,7 +9,7 @@ class HouseController{
         })
     }
 
-    async store(req, res){
+    async store(req, res){ // getting data 
         const { filename } = req.file
         const { description, price, location, status } = req.body
         const { user_id } = req.headers
