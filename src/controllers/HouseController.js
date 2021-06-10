@@ -1,4 +1,5 @@
-import House from '../models/House'
+import House from '../models/House';
+import User from '../models/User';
 
 class HouseController{
 
@@ -24,30 +25,55 @@ class HouseController{
             status,
         });
         
-        return res.json(house);
+         
     }
 
     async update(req, res){ //update a house
 
-        const { location } = req.query;
-        const { newLocation } = req.headers;
-        const houses = await House.find({ location });
+        const { filename } = req.file
+        const { house_id } = req.params;
 
-        const house = await House.updateOne({
-            houses: newLocation,
-        });
-        return res.json(house);
+        const { description, price, location, status } = req.body;
+        const { user_id } = req.headers;
+
+
+        const user = await User.findById(user_id);
+        const houses = await House.findById(house_id);
+
+        if(String(user._id) !== String(houses.user._id)){ //Check if user is owner of property 
+
+            return res.status(401).json({ error: 'Não autorizado!'});
+        }
+        
+        await House.updateOne({ _id: house_id }, { // getting by ID passing in params
+                
+            user: user_id,
+            thumbnail: filename,
+            description: description,
+            price,
+            location,
+            status,
+            });
+
+        return res.send();
             
     }
 
-    async delete(req, res){ // delete a house
+    async destroy(req, res){ // delete a house
 
-        const { location } = req.query;
-        const housess = await House.find({ location });
+        const { house_id } = req.body;
+        const { user_id } = req.headers;
 
-        const houses = await House.deleteOne({ location }) // delete by 'location' 
+        const user = await User.findById(user_id);
+        const houses = await House.findById(house_id);
 
-        console.log('deletou')
+        if(String(user._id) !== String(houses.user._id)){ //Check if user is owner of property 
+            return res.status(401).json({ error: 'Não autorizado!'});
+        }
+
+        await House.findByIdAndDelete({_id: house_id});
+        
+        return res.status(204).send();
 
 
     }
