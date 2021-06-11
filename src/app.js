@@ -12,7 +12,7 @@ class App{
     mongoose.connect('mongodb+srv://admin:admin@cluster0.mt7qk.mongodb.net/devhouse?retryWrites=true&w=majority', {
       useNewUrlParser: true, //Configure to a new URL format
       useUnifiedTopology: true, // keep a stable connection
-      
+
     });
 
     this.middlewares();
@@ -24,7 +24,7 @@ class App{
     this.server.use(cors()); //be free, my friend!
     this.server.use(
       '/files',
-      express.static(path.resolve(__dirname, '..', 'uploads')) //middleware to URL 
+      express.static(path.resolve(__dirname, '..', 'uploads')) //middleware to URL
     );
 
     this.server.use(express.json());
